@@ -1,0 +1,36 @@
+{
+    "something_went_wrong": "something_went_wrong",
+    "fill_required_values": "fill_required_values",
+    "user": {
+        "not_found": "user_not_found",
+        "username_is_in_use": "username_is_in_use",
+        "email_is_in_use": "email_is_in_use",
+        "logistration_error": "logistration_error",
+        "activate_email": "activate_email"
+    },
+    "post": {
+        "not_found": "post_not_found"
+    },
+    "email_verification" :{
+        "already_verified": "already_verified",
+        "code_does_not_match": "code_does_not_match"
+    },
+    "follow_user": {
+        "target_not_found": "target_not_found",
+        "target_user_must_be_different_person": "target_user_must_be_different_person"
+    },
+    "token": {
+    },
+    "message": {
+        "false_type": "false_type",
+        "message_not_secret": "message_not_secret",
+        "sender_and_receiver_cannot_be_same_account": "sender_and_receiver_cannot_be_same_account",
+        "you_already_sent_invite_for_same_post": "you_already_sent_invite_for_same_post",
+        "user_already_accepted_your_invite": "user_already_accepted_your_invite"
+    },
+    "invite": {
+        "not_found": "invite_not_found",
+        "not_authorised": "not_authorised",
+        "already_accepted": "already_accepted"
+    }
+}
