@@ -11,7 +11,7 @@ const PORT = 5000;
 
 const server = new ApolloServer({
   schema,
-  playground: !!process.env.IN_DEVELOPMENT,
+  playground: !process.env.PRODUCTION,
 });
 
 server.applyMiddleware({ app });
@@ -21,15 +21,22 @@ server.applyMiddleware({ app });
  * 2. pm2 restart index
  */
 
-if (process.env.IN_DEVELOPMENT) {
+if (!process.env.PRODUCTION) {
   app.use(cors());
 }
 
 // MongoDB Connection
-mongoose.connect('mongodb://mongo:27017/highcool', { useNewUrlParser: true }, (err) => {
-  if (err) throw err;
+mongoose.connect(
+  `mongodb://${process.env.PRODUCTION ? 'mongo-db' : 'localhost'}:27017/highcool`,
+  { useNewUrlParser: true },
+  (err) => {
+    if (err) throw err;
 
-  console.log('MongoDB server has connected succesfully');
-});
+    console.log('MongoDB server has connected succesfully');
+  },
+);
 
-app.listen(PORT, '127.0.0.1', () => console.log(`🚀 Server ready at http://localhost:${PORT}`));
+app.listen(
+  PORT,
+  /* '127.0.0.1', */ () => console.log(`🚀 Server ready at http://localhost:${PORT}`),
+);
