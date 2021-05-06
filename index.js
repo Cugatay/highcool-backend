@@ -16,14 +16,9 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-/* Server restarting steps:
- * 1. be sure about you pushed and pulled git
- * 2. pm2 restart index
- */
-
-if (!process.env.PRODUCTION) {
-  app.use(cors());
-}
+// if (!process.env.PRODUCTION) {
+app.use(cors());
+// }
 
 // MongoDB Connection
 mongoose.connect(
