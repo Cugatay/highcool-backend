@@ -26,6 +26,7 @@ const resolvers = {
   },
   Mutation: {
     async login(parent, { usernameOrEmail, password }) {
+      console.log(usernameOrEmail, password);
       try {
         if (!usernameOrEmail || !password || usernameOrEmail[0] === ' ' || password[0] === ' ') {
           throw new Error(errors.fill_required_values);

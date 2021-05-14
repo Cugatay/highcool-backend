@@ -235,7 +235,8 @@ const resolvers = {
       try {
         const user = await verificateUser({ token });
 
-        const posts = await Post.find();
+        const posts = await Post.find().sort('-createdAt');
+        // const posts = (await Post.find()).reverse();
 
         for (let i = 0; posts[i] !== undefined; i++) {
           const post = posts[i];

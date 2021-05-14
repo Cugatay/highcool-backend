@@ -154,7 +154,7 @@ const resolvers = {
           });
         }
 
-        return { message: 'success', post_id: newComment._id };
+        return { message: 'success', comment_id: newComment._id };
       } catch (e) {
         return e;
       }

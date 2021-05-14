@@ -10,6 +10,11 @@ const typeDefs = gql`
     post_id: ID
   }
 
+  type commentPostRespone {
+    message: String!
+    comment_id: ID
+  }
+
   type Mutation {
     createPost(
       token: String!
@@ -23,7 +28,7 @@ const typeDefs = gql`
       post_id: ID!
       content: String!
       isPrivate: Boolean # private_code: String
-    ): createPostRespone
+    ): commentPostRespone
 
     learnPostOwner(token: String!, post_id: ID!, content: String!): ResMsg
     acceptOrDeclineInvite(token: String!, invite_id: ID!, isAccepted: Boolean!): ResMsg
