@@ -187,9 +187,9 @@ const resolvers = {
           throw new Error(errors.invite.not_found);
         }
 
-        if (invite.info.accepted === isAccepted) {
-          throw new Error(errors.invite.already_accepted);
-        }
+        // if (invite.info.accepted === isAccepted) {
+        //   throw new Error(errors.invite.already_accepted);
+        // }
 
         if (isAccepted) {
           await invite.updateOne({ 'info.accepted': true });
