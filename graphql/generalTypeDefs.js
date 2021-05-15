@@ -1,6 +1,8 @@
 const { gql } = require('apollo-server');
 
 const generalTypeDefs = gql`
+  scalar Date
+
   type LikesInfo {
     likesRate: Int!
     isLiked: Boolean
@@ -32,7 +34,7 @@ const generalTypeDefs = gql`
     content: String!
     likesInfo: LikesInfo!
     commentsInfo: CommentsInfo!
-    createdAt: String!
+    createdAt: Date!
   }
 
   type Comment {
@@ -40,7 +42,7 @@ const generalTypeDefs = gql`
     _id: ID!
     content: String!
     likesInfo: LikesInfo!
-    createdAt: String!
+    createdAt: Date!
   }
 
   type ResMsg {
