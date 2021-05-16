@@ -19,24 +19,6 @@ const resolvers = {
       try {
         const user = await verificateUser({ token });
 
-        const accepted_new = await Message.find({
-          'info.type': 'invite',
-          sender_id: user._id,
-          'info.accepted': true,
-          'info.did_user_see': false,
-        }).then(async (data) => {
-          if (data.length) {
-            await Message.updateMany(
-              {
-                _id: {
-                  $in: data,
-                },
-              },
-              { 'info.did_user_see': true },
-            );
-          }
-          return data;
-        });
         const incoming = await Message.find({
           'info.type': 'invite',
           receiver_id: user._id,
@@ -52,7 +34,27 @@ const resolvers = {
           sender_id: user._id,
           'info.accepted': true,
           'info.did_user_see': true,
-        });
+        }).sort('-createdAt');
+        const accepted_new = await Message.find({
+          'info.type': 'invite',
+          sender_id: user._id,
+          'info.accepted': true,
+          'info.did_user_see': false,
+        })
+          .sort('-createdAt')
+          .then(async (data) => {
+            if (data.length) {
+              await Message.updateMany(
+                {
+                  _id: {
+                    $in: data,
+                  },
+                },
+                { 'info.did_user_see': true },
+              );
+            }
+            return data;
+          });
 
         for (let i = 0; accepted_new[i] !== undefined; i++) {
           const invite = accepted_new[i];
