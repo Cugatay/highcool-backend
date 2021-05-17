@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-// const shortid = require('shortid');
+const shortid = require('shortid');
 const bcrypt = require('bcrypt');
 const errors = require('../../errors.json');
 
@@ -65,20 +65,21 @@ const resolvers = {
           if (existUser.username === username) throw new Error(errors.user.username_is_in_use);
           if (existUser.email === email) throw new Error(errors.user.email_is_in_use);
         }
+        const email_verification_code = shortid.generate();
 
         const newUser = await new User({
           username,
           password: cryptedPassword,
           nameSurname,
           email,
-          // email_verification_code: shortid.generate(),
+          email_verification_code,
         });
         await newUser.save((err) => {
           if (err) throw err;
         });
 
         // -----------------------------------------
-        await emailSender({ email });
+        await emailSender({ email, code: email_verification_code });
         // -----------------------------------------
 
         return {
@@ -89,7 +90,21 @@ const resolvers = {
         return e;
       }
     },
+    async resendEmail(parent, { token }) {
+      try {
+        const { usernameOrEmail, password } = tokenHelper.verify(token);
+        const user = await verificateUser({ usernameOrEmail, password });
+        if (!user.email_verification_code) {
+          throw new Error(errors.email_verification.already_verified);
+        }
 
+        await emailSender({ email: user.email, code: user.email_verification_code });
+
+        return { message: 'success' };
+      } catch (e) {
+        return e;
+      }
+    },
     async verifyEmail(parent, { token, code }) {
       try {
         const { usernameOrEmail, password } = jwt.verify(token, process.env.SECRET_TOKEN_KEY);
