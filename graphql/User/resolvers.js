@@ -43,15 +43,13 @@ const resolvers = {
       }
     },
 
-    async register(parent, { username, password, nameSurname, email }) {
+    async register(parent, { username, password, email }) {
       if (
         !username ||
         !password ||
-        !nameSurname ||
         !email ||
         username[0] === ' ' ||
         password[0] === ' ' ||
-        nameSurname[0] === ' ' ||
         email[0] === ' '
       ) {
         throw new Error(errors.fill_required_values);
@@ -70,7 +68,6 @@ const resolvers = {
         const newUser = await new User({
           username,
           password: cryptedPassword,
-          nameSurname,
           email,
           email_verification_code,
         });

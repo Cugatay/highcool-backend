@@ -29,7 +29,7 @@ const typeDefs = gql`
 
   type Mutation {
     login(usernameOrEmail: String!, password: String!): Token
-    register(username: String!, password: String!, nameSurname: String, email: String!): Token
+    register(username: String!, password: String!, email: String!): Token
 
     resendEmail(token: String!): ResMsg
     verifyEmail(token: String!, code: String!): ResMsg
