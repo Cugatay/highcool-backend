@@ -6,7 +6,8 @@
         "username_is_in_use": "username_is_in_use",
         "email_is_in_use": "email_is_in_use",
         "logistration_error": "logistration_error",
-        "activate_email": "activate_email"
+        "activate_email": "activate_email",
+        "email_is_not_valid": "email_is_not_valid"
     },
     "post": {
         "not_found": "post_not_found"

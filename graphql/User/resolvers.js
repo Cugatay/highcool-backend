@@ -55,9 +55,16 @@ const resolvers = {
         throw new Error(errors.fill_required_values);
       }
 
+      function validateEmail(getMail) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(getMail).toLowerCase());
+      }
+
       try {
         const existUser = await User.findOne({ $or: [{ username }, { email }] });
         const cryptedPassword = await bcrypt.hash(password, 13);
+        const isEmailValid = validateEmail(email);
+        if (!isEmailValid) throw new Error(errors.user.email_is_not_valid);
 
         if (existUser) {
           if (existUser.username === username) throw new Error(errors.user.username_is_in_use);
