@@ -200,24 +200,6 @@ const resolvers = {
             (await Post.findById(invite.info.post_id)) ||
             (await Comment.findById(invite.info.post_id));
 
-          // const isUserLiked = postOrComment.likes.find((like) => {
-          //   return like === user.username;
-          // });
-          // const isUserDisliked = postOrComment.dislikes.find((dislike) => {
-          //   return dislike === user.username;
-          // });
-
-          // const likes = postOrComment.likes.length;
-          // const dislikes = postOrComment.dislikes.length;
-
-          // postOrComment.likesInfo = {
-          //   likesRate: likes - dislikes,
-          //   isLiked: isUserLiked ? true : isUserDisliked ? false : null,
-          // };
-
-          // const count = await Comment.count({ post_id: postOrComment._id });
-          // postOrComment.commentsInfo = { count };
-
           invite.post = postOrComment;
           invite.receiver = postOwner;
           invite.content = content;
@@ -237,8 +219,19 @@ const resolvers = {
       try {
         const user = await verificateUser({ token });
 
-        const posts = await Post.find().sort('-createdAt');
-        // const posts = (await Post.find()).reverse();
+        const posts = await Post.find();
+
+        const shuffle = (v) => {
+          for (
+            let j, x, i = v.length;
+            i;
+            // eslint-disable-next-line radix
+            j = parseInt(Math.random() * i), x = v[--i], v[i] = v[j], v[j] = x
+          );
+          return v;
+        };
+
+        shuffle(posts);
 
         for (let i = 0; posts[i] !== undefined; i++) {
           const post = posts[i];
@@ -270,20 +263,7 @@ const resolvers = {
           post.commentsInfo = { comments, count };
         }
 
-        // const accepted_new_count = await Message.count({
-        //   'info.type': 'invite',
-        //   sender_id: user._id,
-        //   'info.accepted': true,
-        //   'info.did_user_see': false,
-        // });
-
-        // const incoming_count = await Message.count({
-        //   'info.type': 'invite',
-        //   receiver_id: user._id,
-        //   'info.accepted': false,
-        // });
-
-        return posts; // , notificationsCount: accepted_new_count + incoming_count };
+        return posts;
       } catch (e) {
         return e;
       }
