@@ -263,19 +263,19 @@ const resolvers = {
           post.commentsInfo = { comments, count };
         }
 
-        posts.sort((a, b) => {
-          if (a.commentsInfo.count > 10) {
-            return b.commentsInfo.count - a.commentsInfo.count;
-          }
-          return b;
-        });
+        // posts.sort((a, b) => {
+        //   if (a.commentsInfo.count > 10) {
+        //     return b.commentsInfo.count - a.commentsInfo.count;
+        //   }
+        //   return b;
+        // });
 
-        posts.sort((a, b) => {
-          if (a.likesInfo.likesRate > 3) {
-            return b.likesInfo.likesRate - a.likesInfo.likesRate;
-          }
-          return b;
-        });
+        // posts.sort((a, b) => {
+        //   if (a.likesInfo.likesRate > 3) {
+        //     return b.likesInfo.likesRate - a.likesInfo.likesRate;
+        //   }
+        //   return b;
+        // });
 
         return posts;
       } catch (e) {
