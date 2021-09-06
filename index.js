@@ -16,9 +16,9 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
-if (!process.env.PRODUCTION) {
-  app.use(cors());
-}
+// if (!process.env.PRODUCTION) {
+app.use(cors());
+// }
 
 // MongoDB Connection
 mongoose.connect(

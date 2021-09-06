@@ -11,7 +11,7 @@
   "private": true,
   "dependencies": {
     "apollo-server": "^2.21.0",
-    "apollo-server-express": "^2.21.0",
+    "apollo-server-express": "^2.25.2",
     "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -24,6 +24,7 @@
     "shortid": "^2.2.16"
   },
   "devDependencies": {
+    "@types/node": "^16.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.20.0",
     "eslint-config-airbnb": "^18.2.1",
