@@ -14,11 +14,11 @@ const server = new ApolloServer({
   playground: !process.env.PRODUCTION,
 });
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, path: '/api' });
 
-// if (!process.env.PRODUCTION) {
-app.use(cors());
-// }
+if (!process.env.PRODUCTION) {
+  app.use(cors());
+}
 
 // MongoDB Connection
 mongoose.connect(
