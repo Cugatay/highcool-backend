@@ -19,7 +19,8 @@ const verificateUser = async ({ token, usernameOrEmail, password }) => {
   }
 
   const user = await User.findOne({
-    $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
+    username: usernameOrEmail,
+    // $or: [{ username: usernameOrEmail }, { email: usernameOrEmail }],
   });
   if (!user) throw new Error(errors.user.logistration_error);
 
@@ -27,7 +28,7 @@ const verificateUser = async ({ token, usernameOrEmail, password }) => {
 
   if (!passwordVerification) throw new Error(errors.user.logistration_error);
 
-  if (token && user.email_verification_code) throw new Error(errors.user.activate_email);
+  // if (token && user.email_verification_code) throw new Error(errors.user.activate_email);
 
   return user;
 };

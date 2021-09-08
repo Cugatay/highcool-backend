@@ -16,7 +16,7 @@ const generalTypeDefs = gql`
   type User {
     username: String!
     # password: String
-    email: String!
+    # email: String!
     posts: [Post]
     comments: [Comment]
     followers: [User]

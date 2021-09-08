@@ -6,7 +6,7 @@ const UserSchema = new Schema(
   {
     username: String,
     password: String,
-    email: String,
+    // email: String,
     posts: Array,
     comments: Array,
     followers: Array,
@@ -14,7 +14,7 @@ const UserSchema = new Schema(
     messages: Array,
     message_invites: Array,
     notifications: Array,
-    email_verification_code: String,
+    // email_verification_code: String,
     message_codes: Array,
   },
   { timestamps: true },

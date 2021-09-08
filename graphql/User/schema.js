@@ -29,10 +29,10 @@ const typeDefs = gql`
 
   type Mutation {
     login(usernameOrEmail: String!, password: String!): Token
-    register(username: String!, password: String!, email: String!): Token
+    register(username: String!, password: String!): Token
 
-    resendEmail(token: String!): ResMsg
-    verifyEmail(token: String!, code: String!): ResMsg
+    # resendEmail(token: String!): ResMsg
+    # verifyEmail(token: String!, code: String!): ResMsg
 
     followUserToggle(token: String!, target_username: String!): ResMsg
   }
